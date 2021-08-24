@@ -54,4 +54,17 @@ public class AddressBook {
             Edit();
         }
     }
+    // method to delete contact
+    public void Delete() {
+        System.out.println("Enter First Name of a Person to Delete:  ");
+        String editName = sc.nextLine();
+
+        if (editName.equalsIgnoreCase(c.firstName)) {
+            c = null;
+        } else {
+            System.out.println("Invalid First Name! ");
+            System.out.println("Please Enter Valid First Name: ");
+            Delete();
+        }
+    }
 }
