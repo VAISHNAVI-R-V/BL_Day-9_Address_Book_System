@@ -2,10 +2,10 @@ package com.bl.addressbook;
 
 import java.util.Scanner;
 
-public class AddAddressBook {
+public class AddressBook {
     Contacts c;
     Scanner sc = new Scanner(System.in);
-
+// Method to Add Contacts
     public void Add() {
         c = new Contacts();
 
@@ -30,6 +30,7 @@ public class AddAddressBook {
         System.out.println("Enter Email ID : ");
         String EmailID = sc.nextLine();
 
+    // To Set Details for Contacts
         c.setFirstName(firstName);
         c.setLastName(LastName);
         c.setCity(cityName);
@@ -39,6 +40,18 @@ public class AddAddressBook {
         c.setEmail(EmailID);
 
         System.out.println(c);
+    }
+    // Method to Edit Contacts
+    public void Edit() {
+        System.out.println("Enter First Name of a Person to Edit:  ");
+        String editName = sc.nextLine();
 
+        if (editName.equalsIgnoreCase(c.firstName)) {
+            Add();
+        } else {
+            System.out.println("Invalid First Name! ");
+            System.out.println("Please Enter Valid First Name: ");
+            Edit();
+        }
     }
 }

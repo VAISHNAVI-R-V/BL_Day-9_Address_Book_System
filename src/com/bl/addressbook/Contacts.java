@@ -2,14 +2,15 @@ package com.bl.addressbook;
 
 public class Contacts {
     // instantce variable
-    private String firstName;
-    private String lastName;
-    private String city;
-    private String state;
-    private String pin;
-    private String mobileNo;
-    private String email;
-// Added default constructor for contact string
+    String firstName;
+    String lastName;
+    String city;
+    String state;
+    String pin;
+    String mobileNo;
+    String email;
+
+    // Added default constructor for contact string
     public Contacts() {
 
         this.firstName = firstName;
