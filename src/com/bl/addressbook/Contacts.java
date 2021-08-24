@@ -10,8 +10,7 @@ public class Contacts {
     private String mobileNo;
     private String email;
 // Added default constructor for contact string
-    public Contacts ( String firstName, String lastName, String city,
-                         String state, String pin, String mobileNo, String email) {
+    public Contacts() {
 
         this.firstName = firstName;
         this.lastName = lastName;
