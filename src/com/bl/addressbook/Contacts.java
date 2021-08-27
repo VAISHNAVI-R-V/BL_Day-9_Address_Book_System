@@ -1,7 +1,7 @@
 package com.bl.addressbook;
 
 public class Contacts {
-    // instantce variable
+    // instance variable
     String firstName;
     String lastName;
     String city;
@@ -11,21 +11,26 @@ public class Contacts {
     String email;
 
     // Added default constructor for contact string
-    public Contacts() {
+    public Contacts(String firstName, String lastName, String cityName,
+                    String stateName, String pinNumber, String mobileNumber, String emailID) {
 
         this.firstName = firstName;
         this.lastName = lastName;
-        this.city = city;
-        this.state = state;
-        this.pin = pin;
-        this.mobileNo = mobileNo;
-        this.email = email;
+        this.city = cityName;
+        this.state = stateName;
+        this.pin = pinNumber;
+        this.mobileNo = mobileNumber;
+        this.email = emailID;
     }
 
 // generated getter setter method
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getLastName() {
