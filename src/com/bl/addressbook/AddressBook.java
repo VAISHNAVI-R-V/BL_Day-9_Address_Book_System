@@ -8,7 +8,6 @@ public class AddressBook {
     Scanner sc = new Scanner(System.in);
     ArrayList<Contacts> contactList = new ArrayList<Contacts>();
 
-
     // Method to Add Contacts
     public void Add() {
         // c = new Contacts(firstName, LastName, cityName, statetName, pinNumber, mobileNumber, EmailID);
@@ -46,7 +45,6 @@ public class AddressBook {
         // used ArrayList to store
         contactList.add(new Contacts(firstName, LastName, cityName,
                 stateName, pinNumber, mobileNumber, EmailID));
-        System.out.println(contactList);
     }
 
     // Method to Edit Contacts
@@ -132,7 +130,7 @@ public class AddressBook {
         }
     }
 
-    public void getMenu() {
+    public void getMenu(AddressBook addressBook) {
         System.out.println("------------------Menu For AddressBooK------------------");
 
         boolean exit = false;
