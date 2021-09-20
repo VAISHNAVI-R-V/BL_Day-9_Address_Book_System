@@ -1,8 +1,6 @@
 package com.bl.addressbook;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBook {
@@ -10,13 +8,31 @@ public class AddressBook {
     Scanner sc = new Scanner(System.in);
     ArrayList<Contacts> contactList = new ArrayList<Contacts>();
 
+    public static Map<String, Contacts> nameHashMap = new HashMap<String, Contacts>();
+    public static Map<String, Contacts> cityHashMap = new HashMap<String, Contacts>();
+    public static Map<String, Contacts> stateHashMap = new HashMap<String, Contacts>();
+
     public boolean checkContact(Contacts contact) {
         List<Contacts> checkByName = searchByName(contact.getFirstName());
         for (Contacts equalName : checkByName)
             if (equalName.equals(contact))
                 return false;
         contactList.add(contact);
+        nameHashMap.put(contact.getFirstName(), contact);
+        cityHashMap.put(contact.getCity(), contact);
+        stateHashMap.put(contact.getState(),contact);
         return true;
+    }
+
+    @Override
+    public String toString() {
+        if (contactList.isEmpty())
+            return "No contacts found!";
+        String result = new String();
+        for (int i = 0; i < contactList.size(); i++) {
+            result += " " + contactList.get(i);
+        }
+        return result;
     }
 
     public List<Contacts> searchByName(String name) {
@@ -31,6 +47,16 @@ public class AddressBook {
 
     public List<Contacts> searchByState(String state) {
         return contactList.stream().filter(person -> person.getState().equalsIgnoreCase(state)).collect(Collectors.toList());
+    }
+
+    public static void viewByName(Map<String, Contacts> nameHashMap) {
+        nameHashMap.entrySet().stream().forEach(e -> System.out.println(e.getKey() + "="+ e.getValue().toString()));
+    }
+    public static void viewByCity(Map<String, Contacts> cityHashMap) {
+        cityHashMap.entrySet().stream().forEach(e -> System.out.println(e.getKey() + "="+ e.getValue().toString()));
+    }
+    public static void viewByState(Map<String, Contacts> stateHashMap) {
+        stateHashMap.entrySet().stream().forEach(e -> System.out.println(e.getKey() + "="+ e.getValue().toString()));
     }
 
 
@@ -240,4 +266,28 @@ public class AddressBook {
         }
     }
 
+    public void veiwByOption(Map<String, AddressBook> addressbookHashMap) {
+        System.out.println("1. View By name");
+        System.out.println("2. View By city");
+        System.out.println("3. View By state");
+        System.out.println("4. Back");
+        System.out.print("Enter Your choice: ");
+        int choice =sc.nextInt();
+        sc.nextLine();
+        switch (choice) {
+            case 1:
+                viewByName(nameHashMap);
+                break;
+            case 2:
+                viewByCity(cityHashMap);
+                break;
+            case 3:
+                viewByState(stateHashMap);
+                break;
+            case 4:
+                return;
+            default:
+                System.out.println("INVALID CHOICE!");
+        }
+    }
 }

@@ -20,7 +20,8 @@ public class AddressBookMain {
             System.out.println("2. Select Address Book");
             System.out.println("3. Delete Address Book");
             System.out.println("4. Search by Option");
-            System.out.println("5. Exit");
+            System.out.println("5. View By Option");
+            System.out.println("6. Exit");
             System.out.print("Enter Your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -54,6 +55,9 @@ public class AddressBookMain {
 
                     break;
                 case 5:
+                    addressBook.veiwByOption(addressbookHashMap);
+                    break;
+                case 6:
                     sc.close();//for closing the programme
                     return;
                 default:
