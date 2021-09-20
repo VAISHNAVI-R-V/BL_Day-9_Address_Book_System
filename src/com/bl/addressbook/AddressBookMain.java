@@ -19,7 +19,8 @@ public class AddressBookMain {
             System.out.println("1. New Address Book");
             System.out.println("2. Select Address Book");
             System.out.println("3. Delete Address Book");
-            System.out.println("4. Exit");
+            System.out.println("4. Search by Option");
+            System.out.println("5. Exit");
             System.out.print("Enter Your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -49,6 +50,10 @@ public class AddressBookMain {
                     addressbookHashMap.remove(name);//delete hashmap using remove fun
                     break;
                 case 4:
+                    addressBook.searchByOption();
+
+                    break;
+                case 5:
                     sc.close();//for closing the programme
                     return;
                 default:

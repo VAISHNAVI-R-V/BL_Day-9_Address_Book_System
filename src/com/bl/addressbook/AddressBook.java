@@ -1,17 +1,44 @@
 package com.bl.addressbook;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBook {
     Contacts c;
     Scanner sc = new Scanner(System.in);
     ArrayList<Contacts> contactList = new ArrayList<Contacts>();
 
+    public boolean checkContact(Contacts contact) {
+        List<Contacts> checkByName = searchByName(contact.getFirstName());
+        for (Contacts equalName : checkByName)
+            if (equalName.equals(contact))
+                return false;
+        contactList.add(contact);
+        return true;
+    }
+
+    public List<Contacts> searchByName(String name) {
+        //stream and lambda for find filter given name from arraylist
+        return contactList.stream().filter(person -> person.getFirstName().equalsIgnoreCase(name)).collect(Collectors.toList());
+
+    }
+
+    public List<Contacts> searchByCity(String city) {
+        return contactList.stream().filter(person -> person.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
+    }
+
+    public List<Contacts> searchByState(String state) {
+        return contactList.stream().filter(person -> person.getState().equalsIgnoreCase(state)).collect(Collectors.toList());
+    }
+
+
     // Method to Add Contacts
-    public void Add() {
+    public static Contacts Add() {
         // c = new Contacts(firstName, LastName, cityName, statetName, pinNumber, mobileNumber, EmailID);
 
+        Scanner sc = new Scanner(System.in);
         System.out.println("Enter First Name : ");
         String firstName = sc.nextLine();
 
@@ -43,8 +70,10 @@ public class AddressBook {
 //        c.setEmail(EmailID);
 
         // used ArrayList to store
-        contactList.add(new Contacts(firstName, LastName, cityName,
-                stateName, pinNumber, mobileNumber, EmailID));
+//        contactList.add(new Contacts(firstName, LastName, cityName,
+//                stateName, pinNumber, mobileNumber, EmailID));
+        return new Contacts(firstName, LastName, cityName,
+                stateName, pinNumber, mobileNumber, EmailID);
     }
 
     // Method to Edit Contacts
@@ -142,9 +171,19 @@ public class AddressBook {
             sc.nextLine();
             switch (op) {
                 case 1:
-                    Add();
-                    System.out.println("Contact added successfully....");
+                    if (addressBook.checkContact(Add()))
+                        System.out.println("Contact Added Successfully....!");
+                    else
+                        System.out.println("Contact Already Exist....!");
                     break;
+                //  Add();
+//                    System.out.println("Contact added successfully....");
+//                    if (addressBook.checkContact(Add())) {
+//                        System.out.println("Contacts added Successfully!!");
+//                    } else{
+//                        System.out.println("Contact Already Exists!!");
+//                    }
+//                    break;
                 case 2:
                     Edit();
                     System.out.println("Contact edited successfully....");
@@ -165,4 +204,40 @@ public class AddressBook {
             }
         } while (!exit);
     }
+
+    public void searchByOption() {
+
+        AddressBook addressBook = new AddressBook();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("1. By name");
+        System.out.println("2. By city");
+        System.out.println("3. By state");
+        System.out.println("4. Back");
+        System.out.println("Your choice: ");
+        int choice = sc.nextInt();
+        sc.nextLine();
+        switch (choice) {
+            case 1:
+                System.out.println("Enter name: ");
+                String name = sc.nextLine();
+                contactList.forEach(book -> searchByName(name).forEach(System.out::println));
+                break;
+            case 2:
+                System.out.println("Enter city: ");
+                String city = sc.nextLine();
+                contactList.forEach(book -> searchByCity(city).forEach(System.out::println));
+                break;
+            case 3:
+                System.out.println("Enter state: ");
+                String state = sc.nextLine();
+                contactList.forEach(book -> searchByState(state).forEach(System.out::println));
+                break;
+            case 4:
+                return;
+            default:
+                System.out.println("INVALID CHOICE!");
+
+        }
+    }
+
 }
