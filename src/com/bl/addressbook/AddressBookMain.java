@@ -6,14 +6,21 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * @purpose: To implement Address Book System.
+ *
+ * @author VAISHNAVI R. VISHWAKARMA.
+ * @DATE 24-SEP-2021.
+ *
+ */
 public class AddressBookMain {
     // main method
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book System ! ");
         Scanner sc = new Scanner(System.in);
-        Map<String,AddressBook> addressbookHashMap = new HashMap<String, AddressBook>();
+        Map<String, AddressBook> addressbookHashMap = new HashMap<String, AddressBook>();
         AddressBook addressBook = new AddressBook();
-       // addressBook.getMenu();
+        // addressBook.getMenu();
         while (true) {
             System.out.println("\n--------------------------Welcome to Address Book System--------------------------");
             System.out.println("1. New Address Book");
@@ -22,7 +29,9 @@ public class AddressBookMain {
             System.out.println("4. Search by Option");
             System.out.println("5. View By Option");
             System.out.println("6. Count By Option");
-            System.out.println("7. Exit");
+            System.out.println("7. Write in A File");
+            System.out.println("8. Read in A File");
+            System.out.println("9. Exit");
             System.out.print("Enter Your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -38,12 +47,12 @@ public class AddressBookMain {
                     System.out.println("List of available Address Book : ");
                     Set keys = addressbookHashMap.keySet();//retrived keys from hashmap to show addressbooklist
                     Iterator i = keys.iterator();
-                    while (i.hasNext()){
+                    while (i.hasNext()) {
                         System.out.println(i.next());
                     }
                     System.out.println("Enter Address Book name you want to Open : ");
                     String name = sc.nextLine();
-                    System.out.println("Current Address Book is : "+name);
+                    System.out.println("Current Address Book is : " + name);
                     addressBook.getMenu(addressbookHashMap.get(name));//call method with passing address book name
                     break;
                 case 3:
@@ -63,6 +72,14 @@ public class AddressBookMain {
 
                     break;
                 case 7:
+                    AddressBookFileIO fileIO = new AddressBookFileIO();
+                    fileIO.writeData(addressbookHashMap);
+                    break;
+                case 8:
+                    AddressBookFileIO addressBookFileIO = new AddressBookFileIO();
+                    addressBookFileIO.readData(addressbookHashMap);
+                    break;
+                case 9:
                     sc.close();//for closing the programme
                     return;
                 default:
